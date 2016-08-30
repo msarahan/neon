@@ -97,7 +97,7 @@ def parse_args():
     return root_yaml, args, be_name, num_epochs, batch_size
 
 
-def load_data(data_dir="."):
+def load_data(root_yaml, data_dir="."):
     """
     Load the specified dataset.
 
@@ -129,7 +129,7 @@ def load_data(data_dir="."):
     return train, test
 
 
-if __name__ == "__main__":
+def main():
     """
     Train and test the specified model.
     """
@@ -144,8 +144,12 @@ if __name__ == "__main__":
 
     if args.model_file:
         model.load_params(args.model_file)
-    train, test = load_data(data_dir=args.data_dir)
+    train, test = load_data(root_yaml=root_yaml, data_dir=args.data_dir)
     # configure callbacks
     callbacks = Callbacks(model, eval_set=test, **args.callback_args)
 
     model.fit(train, optimizer=optim, num_epochs=num_epochs, cost=cost, callbacks=callbacks)
+
+
+if __name__ == "__main__":
+    main()

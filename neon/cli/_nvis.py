@@ -94,7 +94,11 @@ def static_plot(args, plot_height=400, plot_width=600):
         deconv_summary_page(os.path.join(args.out_dir, "deconv.html"), cost_data, deconv_data)
 
 
-if __name__ == "__main__":
+def main():
     args = parse_args()
     if args.in_file and args.out_dir:
         static_plot(args)
+
+
+if __name__ == "__main__":
+    main()

@@ -14,7 +14,7 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------
 import os
-from setuptools import setup, find_packages, Command
+from setuptools import setup, find_packages
 import subprocess
 
 # Define version information
@@ -69,13 +69,17 @@ setup(name='neon',
       author_email='info@nervanasys.com',
       url='http://www.nervanasys.com',
       license='License :: OSI Approved :: Apache Software License',
-      scripts=['bin/neon', 'bin/nvis'],
       packages=find_packages(),
       package_data={'neon': ['backends/kernels/sass/*.sass',
                              'backends/kernels/cubin/*.cubin',
                              'backends/kernels/maxas/*.pl',
                              'backends/kernels/maxas/MaxAs/*.pm',
                              '../loader/bin/*.so']},
+      entry_points={
+          'console_scripts': [
+              'neon = neon.cli._neon:main',
+              'nvis = neon.cli._nvis:main',
+          ]},
       classifiers=['Development Status :: 3 - Alpha',
                    'Environment :: Console',
                    'Environment :: Console :: Curses',
